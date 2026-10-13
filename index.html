@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    #validateform {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: #f5deb3;
+    }
+    #nameinput, #emailinput, #passinput {
+      padding: 10px;
+      width: 500px;
+      margin-bottom: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+
+    
+  </style>
+</head>
+<body>
+
+  <form id="validateform">
+    <h1>Registration Form</h1>
+    <input type="text" placeholder="Name" id="nameinput">
+    <span id="nameError" class="error"></span>
+
+    <input type="email" placeholder="E-mail" id="emailinput">
+    <span id="emailError" class="error"></span>
+
+    <input type="password" placeholder="Password" id="passinput">
+    <span id="passError" class="error"></span>
+
+    <button id="btn" type="submit" disabled>Submit</button>
+  </form>
+
+  <script>
+    const nameInput = document.getElementById("nameinput");
+    const emailInput = document.getElementById("emailinput");
+    const passInput = document.getElementById("passinput");
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const passError = document.getElementById("passError");
+    const btn = document.getElementById("btn");
+    const validateForm = document.getElementById("validateform");
+
+    function Formvalidation() {
+      let isValid = true;
+
+      // Check Name
+      if (nameInput.value.trim() === "") {
+        nameError.textContent = "Name cannot be empty.";
+        isValid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Check Email
+      if (emailInput.checkValidity() && emailInput.value.trim() !== "") {
+        emailError.textContent = "";
+      } else {
+        emailError.textContent = "Email is not valid.";
+        isValid = false;
+      }
+
+      // Check Password
+      if (passInput.value.length < 6) {
+        passError.textContent = "Password is too short.";
+        isValid = false;
+      } else {
+        passError.textContent = "";
+      }
+
+      btn.disabled = !isValid;
+    }
+
+    nameInput.addEventListener("input", Formvalidation);
+    emailInput.addEventListener("input", Formvalidation);
+    passInput.addEventListener("input", Formvalidation);
+
+    validateForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Submitted successfully!");
+    });
+  </script>
+
+</body>
+</html>
