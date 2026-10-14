@@ -5,26 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Form</title>
   <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+    }
+
     #validateform {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       background-color: #f5deb3;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-sizing: border-box;
     }
-    #nameinput, #emailinput, #passinput {
-      padding: 10px;
-      width: 500px;
-      margin-bottom: 5px;
+
+    #nameinput, #emailinput, #passinput, #btn {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px; 
     }
+
     .error {
       color: red;
-      font-size: 15px;
-      margin-bottom: 15px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      min-height: 18px;
     }
-
-
-    
   </style>
 </head>
 <body>
@@ -33,13 +52,13 @@
     <h1>Registration Form</h1>
     <input type="text" placeholder="Name" id="nameinput">
     <span id="nameError" class="error"></span>
-
+    
     <input type="email" placeholder="E-mail" id="emailinput">
     <span id="emailError" class="error"></span>
-
+    
     <input type="password" placeholder="Password" id="passinput">
     <span id="passError" class="error"></span>
-
+    
     <button id="btn" type="submit" disabled>Submit</button>
   </form>
 
@@ -56,7 +75,6 @@
     function Formvalidation() {
       let isValid = true;
 
-      // Check Name
       if (nameInput.value.trim() === "") {
         nameError.textContent = "Name cannot be empty.";
         isValid = false;
@@ -64,7 +82,6 @@
         nameError.textContent = "";
       }
 
-      // Check Email
       if (emailInput.checkValidity() && emailInput.value.trim() !== "") {
         emailError.textContent = "";
       } else {
@@ -72,7 +89,6 @@
         isValid = false;
       }
 
-      // Check Password
       if (passInput.value.length < 6) {
         passError.textContent = "Password is too short.";
         isValid = false;
